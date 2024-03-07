@@ -1,0 +1,23 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:12.3
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./ini.sql:/docker-entrypoint-initdb.d/init.sql
+  springbootapp:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+
+
+
+
