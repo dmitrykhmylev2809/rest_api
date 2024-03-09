@@ -5,6 +5,7 @@ import com.testtask.testtaskrestapi.mapper.NewsMapper;
 import com.testtask.testtaskrestapi.service.NewsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,9 @@ public class NewsController {
     @PutMapping("/{id}")
     public ResponseEntity<NewsDTO> updateNews(@PathVariable Long id, @RequestBody NewsDTO newsDTO) {
         NewsDTO updatedNewsDTO = newsService.updateNews(id, newsDTO);
-        return ResponseEntity.ok().body(updatedNewsDTO);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(updatedNewsDTO);
     }
 
     @DeleteMapping("/{id}")
